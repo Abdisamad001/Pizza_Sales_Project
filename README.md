@@ -1,86 +1,25 @@
-# Pizza_Sales_Project
-/* 1. Total Revenue:*/
-SELECT SUM(total_price) AS Total_Revenue FROM [piza sales];
+Title: Pizza Sales Analysis with Power BI Integration (2023 Implementation)
 
-/* 2. Average Order Value*/
-SELECT (SUM(total_price) / COUNT(DISTINCT order_id)) AS Avg_order_Value FROM [piza sales]
+Description:
+Welcome to our Pizza Sales Analysis with Power BI Integration, showcasing the implementation of SQL queries in conjunction with Power BI for comprehensive data visualization and insights. This repository provides a powerful solution for analyzing and visualizing pizza sales data, offering valuable business intelligence for decision-making.
 
-/* 3.Total Pizzas Sold*/
-SELECT SUM(quantity) AS Total_pizza_sold FROM [piza sales]
+By leveraging the SQL queries provided in this repository, you can extract meaningful information from the "Pizza Sales" dataset. These queries cover a wide range of metrics, including total revenue, average order value, total pizzas sold, total orders, average pizzas per order, daily and monthly order trends, sales by pizza category and size, as well as top and bottom performers in terms of revenue, quantity sold, and total orders for various pizza types.
 
-/* 4. Total Orders*/
-SELECT COUNT(DISTINCT order_id) AS Total_Orders FROM [piza sales]
+To take your analysis a step further, we have integrated Power BI, a leading business intelligence tool, with the SQL queries. With Power BI, you can create interactive visualizations, dashboards, and reports based on the extracted data. This integration empowers you to explore trends, identify patterns, and gain actionable insights to drive business growth.
 
-/* 5. Average Pizzas Per Order*/
-SELECT CAST(CAST(SUM(quantity) AS DECIMAL(10,2)) / 
-CAST(COUNT(DISTINCT order_id) AS DECIMAL(10,2)) AS DECIMAL(10,2))
-AS Avg_Pizzas_per_order
-FROM [piza sales]
+Using Power BI's intuitive interface, you can connect to your SQL database, import the results from the SQL queries, and transform them into visually appealing charts, graphs, and tables. Customize your dashboards to monitor key performance indicators, track sales trends over time, and compare different pizza categories, sizes, and performance metrics.
 
-/* 5. B. Daily Trend for Total Orders*/
-SELECT DATENAME(DW, order_date) AS order_day, COUNT(DISTINCT order_id) AS total_orders 
-FROM [piza sales]
-GROUP BY DATENAME(DW, order_date)
+With the Pizza Sales Analysis Power BI integration, you can:
 
-/* C. Monthly Trend for Orders*/
-select DATENAME(MONTH, order_date) as Month_Name, COUNT(DISTINCT order_id) as Total_Orders
-from [piza sales]
-GROUP BY DATENAME(MONTH, order_date)
+Gain a holistic view of your pizza sales performance.
+Track revenue trends and identify opportunities for growth.
+Understand customer behavior and preferences.
+Optimize inventory and staffing based on order trends.
+Analyze the performance of different pizza categories, sizes, and specific pizzas.
+Visualize data in an interactive and user-friendly manner.
+Share reports and dashboards with stakeholders for informed decision-making.
+This repository serves as a comprehensive resource for implementing Pizza Sales Analysis with Power BI integration. You can leverage the SQL queries as a starting point and customize the Power BI visuals to suit your specific business needs.
 
-/* D. % of Sales by Pizza Category*/
-SELECT pizza_category, CAST(SUM(total_price) AS DECIMAL(10,2)) as total_revenue,
-CAST(SUM(total_price) * 100 / (SELECT SUM(total_price) from [piza sales]) AS DECIMAL(10,2)) AS PCT
-FROM [piza sales]
-GROUP BY pizza_category
+Unlock the power of data-driven insights and elevate your pizza sales analysis with the combined capabilities of SQL queries and Power BI visualization. Dive into the repository, explore the implementation details, and witness the transformative potential of data-driven decision-making in the pizza industry.
 
-/* E. % of Sales by Pizza Size*/
-SELECT pizza_size, CAST(SUM(total_price) AS DECIMAL(10,2)) as total_revenue,
-CAST(SUM(total_price) * 100 / (SELECT SUM(total_price) from [piza sales]) AS DECIMAL(10,2)) AS PCT
-FROM [piza sales]
-GROUP BY pizza_size
-ORDER BY pizza_size
-
-/* F. Total Pizzas Sold by Pizza Category*/
-SELECT pizza_category, SUM(quantity) as Total_Quantity_Sold
-FROM [piza sales]
-WHERE MONTH(order_date) = 2
-GROUP BY pizza_category
-ORDER BY Total_Quantity_Sold DESC
-
-/* G. Top 5 Pizzas by Revenue*/
-SELECT Top 5 pizza_name, SUM(total_price) AS Total_Revenue
-FROM [piza sales]
-GROUP BY pizza_name
-ORDER BY Total_Revenue DESC
-
-/* H. Bottom 5 Pizzas by Revenue*/
-SELECT Top 5 pizza_name, SUM(total_price) AS Total_Revenue
-FROM [piza sales]
-GROUP BY pizza_name
-ORDER BY Total_Revenue ASC
-
-/*I. Top 5 Pizzas by Quantity*/
-SELECT Top 5 pizza_name, SUM(quantity) AS Total_Pizza_Sold
-FROM [piza sales]
-GROUP BY pizza_name
-ORDER BY Total_Pizza_Sold DESC
-
-/*J. Bottom 5 Pizzas by Quantity*/
-SELECT TOP 5 pizza_name, SUM(quantity) AS Total_Pizza_Sold
-FROM [piza sales]
-GROUP BY pizza_name
-ORDER BY Total_Pizza_Sold ASC
-
-/*K. Top 5 Pizzas by Total Orders*/
-SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
-FROM [piza sales]
-GROUP BY pizza_name
-ORDER BY Total_Orders DESC
-
-/*L. Borrom 5 Pizzas by Total Orders*/
-SELECT Top 5 pizza_name, COUNT(DISTINCT order_id) AS Total_Orders
-FROM [piza sales]
-GROUP BY pizza_name
-ORDER BY Total_Orders ASC
-
-
+Note: Ensure that you have the "Pizza Sales" dataset and Power BI installed to utilize the provided SQL queries and integrate them with Power BI for visualization purposes.
